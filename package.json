@@ -1,0 +1,39 @@
+{
+  "name": "danmuke-player-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicholasking0816/danmuke-player-demo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicholasking0816/danmuke-player-demo/issues"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.15",
+    "css-loader": "5.2.6",
+    "html-webpack-plugin": "5.5.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sass": "^1.53.0",
+    "sass-loader": "12.1.0",
+    "style-loader": "2.0.0",
+    "ts-loader": "9.3.1",
+    "typescript": "^4.7.4",
+    "uuid": "8.3.2",
+    "webpack": "5.73.0",
+    "webpack-cli": "4.10.0",
+    "webpack-dev-server": "4.9.3"
+  },
+  "homepage": "https://github.com/nicholasking0816/danmuke-player-demo#readme",
+  "dependencies": {
+    "danmuke-player": "^1.0.2"
+  }
+}
