@@ -1,4 +1,16 @@
 .danmuke-player-demo {
+    .btn-paly-advance-wrapper {
+        width: 1000px;
+        margin: 0 auto;
+        height: 30px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        button {
+            height: 100%;
+            background-color: brown;
+            color: white;
+        }
+    }
     .video-wrapper {
         margin: 0 auto;
         position: relative;

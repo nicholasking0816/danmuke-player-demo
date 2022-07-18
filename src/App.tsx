@@ -22,6 +22,21 @@ export class App extends React.Component<any, any, any> {
                 id: uuidV4(),
                 // layer: 'AdvanceLayer',
                 timestamp: Math.floor(100 * Math.random()),
+            })
+        }
+        return danmukeList;
+    }
+
+    palyAdvance() {
+        const danmukeList: any[] = [] as any;
+        const currentTime = this.videoRef.current.currentTime;
+        for(let i = 0; i < 100; i ++) {
+            danmukeList.push({
+                content: '夏目小天使yyds',
+                id: uuidV4(),
+                color: 'brown',
+                layer: 'AdvanceLayer',
+                timestamp: currentTime + Math.floor(100 * Math.random()),
                 animation: {
                     translate: {
                         from: {
@@ -36,7 +51,7 @@ export class App extends React.Component<any, any, any> {
                 } 
             })
         }
-        return danmukeList;
+        this.player.addDmkList(danmukeList);
     }
 
     sendNormalDanmuke() {
@@ -99,6 +114,10 @@ export class App extends React.Component<any, any, any> {
     render() {
         return (
             <div className='danmuke-player-demo'>
+                <div className='btn-paly-advance-wrapper'>
+                    <button className='btn-paly-advance' onClick={this.palyAdvance.bind(this)}>播放高级弹幕</button>
+
+                </div>
                 <div className='video-wrapper'>
                     <video src="najimi.mp4" ref={this.videoRef} controls={true}></video>
                 </div>
