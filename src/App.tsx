@@ -109,6 +109,11 @@ export class App extends React.Component<any, any, any> {
         this.videoRef.current.onpause = () => {
             this.player.stop();
         }
+        this.videoRef.current.onseeked = () => {
+            console.log('aaa ......')
+            debugger;
+            this.player.reset();
+        }
     }
 
     render() {

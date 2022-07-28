@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+    "build": "webpack-cli",
+    "deploy": "scp -P 22 -r dist root@47.104.67.88:/usr/server/app/public"
   },
   "repository": {
     "type": "git",
@@ -18,6 +20,7 @@
   },
   "devDependencies": {
     "@types/react": "18.0.15",
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "5.2.6",
     "html-webpack-plugin": "5.5.0",
     "react": "18.2.0",
@@ -34,6 +37,6 @@
   },
   "homepage": "https://github.com/nicholasking0816/danmuke-player-demo#readme",
   "dependencies": {
-    "danmuke-player": "^1.0.2"
+    "danmuke-player": "^1.0.6"
   }
 }
