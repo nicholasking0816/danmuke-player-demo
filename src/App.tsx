@@ -1,17 +1,21 @@
 import * as React from 'react';
 import {v4 as uuidV4} from 'uuid';
-import { DanmukePlayer } from 'danmuke-player';
+import { AdvanceDmkTrack, DanmukePlayer } from 'danmuke-player';
 import './App.scss';
 import { DmkLayer } from 'danmuke-player';
-import { AdvanceDmkTrack } from './AdvanceDmkTrack';
+import { getDmkDesc, getDmkDesc2, getDmkDesc3, getDmkDesc4, getDmkDesc5, getDmkDesc6 } from './static';
 
 export class App extends React.Component<any, any, any> {
     videoRef: any = React.createRef();
     player: DanmukePlayer;
     normalDanmukeRef: any = React.createRef();
     advanceDanmukeRef: any = React.createRef();
+    dmkContainerRef: any = React.createRef();
     constructor(props) {
         super(props);
+        this.state = {
+            disabled: false
+        }
     }
 
     gDanmukes() {
@@ -28,33 +32,20 @@ export class App extends React.Component<any, any, any> {
     }
 
     palyAdvance() {
-        const danmukeList: any[] = [] as any;
+        this.setState({disabled: true});
+        setTimeout(() => {
+            this.setState({disabled: false});
+        }, 60000);
         const currentTime = this.videoRef.current.currentTime;
-        for(let i = 0; i < 100; i ++) {
-            danmukeList.push({
-                content: '夏目小天使yyds',
-                id: uuidV4(),
-                color: 'brown',
-                layer: 'AdvanceLayer',
-                timestamp: currentTime + Math.floor(100 * Math.random()),
-                animation: {
-                    translate: {
-                        from: {
-                            left: 0,
-                            top: 0
-                        },
-                        to: {
-                            left: Math.floor(1000 * Math.random()),
-                            top: Math.floor(500 * Math.random())
-                        },
-                    }
-                } 
-            })
-        }
-        this.player.addDmkList(danmukeList);
+        this.player.addDmkList(getDmkDesc(currentTime));
+        this.player.addDmkList(getDmkDesc2(currentTime));
+        this.player.addDmkList(getDmkDesc3(currentTime));
+        this.player.addDmkList(getDmkDesc4(currentTime));
+        this.player.addDmkList(getDmkDesc5(currentTime));
+        this.player.addDmkList(getDmkDesc6(currentTime));
     }
 
-    sendNormalDanmuke() {
+    sendNormalDanmuke(): void {
         this.player.addDmkList([
             {
                 content: this.normalDanmukeRef.current.value,
@@ -68,36 +59,45 @@ export class App extends React.Component<any, any, any> {
     sendAdvanceDanmuke() {
         this.player.addDmkList([
             {
-                content: this.advanceDanmukeRef.current.value,
-                id: uuidV4(),
-                layer: 'AdvanceLayer',
                 timestamp: this.videoRef.current.currentTime + 1,
-                color: 'orange',
-                fontSize: 18,
-                animation: {
-                    translate: {
+                layer: 'AdvanceLayer',
+                content: this.advanceDanmukeRef.current.value,
+                duration: 2,
+                animation: [
+                    {
+                        type: 'Translate',
+                        delay: 0,
+                        duration: 1.5,
                         from: {
                             left: 0,
                             top: 0
                         },
                         to: {
-                            left: Math.floor(1000 * Math.random()),
-                            top: Math.floor(500 * Math.random())
-                        },
-
-                    }
-                } 
+                            left: Math.round(500 * Math.random()),
+                            top: Math.round(500 * Math.random())
+                        }
+                    },
+                ],
+                style: {
+                    fontSize: '30px',
+                    lineHeight: '30px',
+                    position: 'absolute',
+                    left: '0px',
+                    top: `0px`,
+                    color: 'red',
+                }
             }
         ])
     }
 
     componentDidMount() {
+        
         this.player = new DanmukePlayer({
             width: 1000,
             height: 562,
             videoInstance: this.videoRef.current,
             currentTime: 0,
-        }, {}, this.gDanmukes(),);
+        } as any, {}, this.gDanmukes());
         this.player.addDmkLayer(new DmkLayer(AdvanceDmkTrack, {
             priority: 3,
             trackCount: 1
@@ -120,7 +120,7 @@ export class App extends React.Component<any, any, any> {
         return (
             <div className='danmuke-player-demo'>
                 <div className='btn-paly-advance-wrapper'>
-                    <button className='btn-paly-advance' onClick={this.palyAdvance.bind(this)}>播放高级弹幕</button>
+                    <button className='btn-paly-advance' disabled={this.state.disabled} onClick={this.palyAdvance.bind(this)}>播放高级弹幕</button>
 
                 </div>
                 <div className='video-wrapper'>
