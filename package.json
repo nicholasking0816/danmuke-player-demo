@@ -37,6 +37,6 @@
   },
   "homepage": "https://github.com/nicholasking0816/danmuke-player-demo#readme",
   "dependencies": {
-    "danmuke-player": "^1.0.8"
+    "danmuke-player": "^1.1.0"
   }
 }
